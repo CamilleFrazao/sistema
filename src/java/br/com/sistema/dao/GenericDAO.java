@@ -16,16 +16,15 @@ public class GenericDAO<T, ID extends Serializable> implements InterfaceDAO<T, I
 
     @Override
     public Class<T> getObjectClass() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public void salvar(T object) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         Transaction transacao = sessao.beginTransaction();
-
+        
         try {
-
             sessao.save(object);
             transacao.commit();
 
@@ -107,9 +106,6 @@ public class GenericDAO<T, ID extends Serializable> implements InterfaceDAO<T, I
     
     }
 
-    @Override
-    public List<T> get15Beans() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 
 }

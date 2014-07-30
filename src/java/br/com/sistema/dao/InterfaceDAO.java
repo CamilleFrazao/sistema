@@ -28,7 +28,7 @@ public interface InterfaceDAO<T, ID extends Serializable > {
     
     List<T> getBeans();
     
-    List<T> get15Beans();
+ 
     
     
     
