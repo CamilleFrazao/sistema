@@ -51,18 +51,18 @@ public class Executar {
         
 
        //TESTE DE BUSCA DO ENDEREÇO POR CEP 
-        String buscaCep = "66095580";
-        Rua ruaTemp = (Rua) session.createCriteria(Rua.class).add(Restrictions.eq("cep", buscaCep)).uniqueResult();
-        System.out.println(ruaTemp.getNome()+" "+ruaTemp.getBairro().getNome()+" "+ruaTemp.getBairro().getCidade().getNome()+" "+ ruaTemp.getBairro().getCidade().getEstado().getSigla());
-        end.setRua(ruaTemp);
-        end.setBairro(ruaTemp.getBairro());
-        end.setCidade(ruaTemp.getBairro().getCidade());
-        end.setEstado(ruaTemp.getBairro().getCidade().getEstado());
-        session.save(end);
-        pessoa.setCpf("00377432288");
-        pessoa.setNome("JOHN GOMES DA SILVA");
-        pessoa.setEndereco(end);
-        session.save(pessoa);
+//        String buscaCep = "66095580";
+//        Rua ruaTemp = (Rua) session.createCriteria(Rua.class).add(Restrictions.eq("cep", buscaCep)).uniqueResult();
+//        System.out.println(ruaTemp.getNome()+" "+ruaTemp.getBairro().getNome()+" "+ruaTemp.getBairro().getCidade().getNome()+" "+ ruaTemp.getBairro().getCidade().getEstado().getSigla());
+//        end.setRua(ruaTemp);
+//        end.setBairro(ruaTemp.getBairro());
+//        end.setCidade(ruaTemp.getBairro().getCidade());
+//        end.setEstado(ruaTemp.getBairro().getCidade().getEstado());
+//        session.save(end);
+//        pessoa.setCpf("00377432288");
+//        pessoa.setNome("JOHN GOMES DA SILVA");
+//        pessoa.setEndereco(end);
+//        session.save(pessoa);
          
 //        //Gerar banco de dados
 //        AnnotationConfiguration ac = new AnnotationConfiguration();
