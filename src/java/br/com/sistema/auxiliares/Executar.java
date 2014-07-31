@@ -29,51 +29,7 @@ public class Executar {
      */
     public static void main(String[] args) {
 
-        Pessoa pessoa = new Pessoa();
-        Endereco end = new Endereco();
-        Bairro bairro = new Bairro();
-//        bairro.setNome("MARCO");
-//        end.setBairro(bairro);
-
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx = session.beginTransaction();
-
-//        pessoa.setCpf("981237192");
-//        pessoa.setNome("JOHN GOMES");
-//        session.save(pessoa);
-//       
-//        Usuario usuario = new Usuario();
-//        usuario.setNome("Felipe Emin");
-//        usuario.setSenha("admin");
-//        usuario.setEmail("rodrigo@admin.com.br");
-       
-
-        
-
-       //TESTE DE BUSCA DO ENDEREÇO POR CEP 
-//        String buscaCep = "66095580";
-//        Rua ruaTemp = (Rua) session.createCriteria(Rua.class).add(Restrictions.eq("cep", buscaCep)).uniqueResult();
-//        System.out.println(ruaTemp.getNome()+" "+ruaTemp.getBairro().getNome()+" "+ruaTemp.getBairro().getCidade().getNome()+" "+ ruaTemp.getBairro().getCidade().getEstado().getSigla());
-//        end.setRua(ruaTemp);
-//        end.setBairro(ruaTemp.getBairro());
-//        end.setCidade(ruaTemp.getBairro().getCidade());
-//        end.setEstado(ruaTemp.getBairro().getCidade().getEstado());
-//        session.save(end);
-//        pessoa.setCpf("00377432288");
-//        pessoa.setNome("JOHN GOMES DA SILVA");
-//        pessoa.setEndereco(end);
-//        session.save(pessoa);
-         
-//        //Gerar banco de dados
-//        AnnotationConfiguration ac = new AnnotationConfiguration();
-//        ac.addAnnotatedClass(Autorizacao.class);
-//        ac.addAnnotatedClass(Usuario.class);
-//        ac.configure();
-//        SchemaExport se = new SchemaExport(ac);
-//        se.create(true, true);
-
-        tx.commit();
-        session.close();
+      
 
     }
 
