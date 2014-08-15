@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/template/layout.xhtml">
+
+    <script src="#{facesContext.externalContext.requestContextPath}/js/geral.js"></script>
+
+    <ui:define name="panel">
+        <h:form id="formPessoa" style="padding-left: 20%;" >
+            <h3 style="color: #333">Cadastro de Clientes</h3>
+            <p:tabView style="width: 70%; font-size: smaller">
+                <p:tab title="Dados pessoais">
+                    <h:panelGrid columns="2" cellpadding="2" >
+                        <h:outputLabel value="CPF:" />
+                        <h:outputLabel value="Nome:"  />
+                        <p:inputMask   mask="999.999.999-99" required="true" style="width: 100px;"  value="#{pessoaService.pessoa.cpf}"/>
+                        <p:inputText style="width: 445px;" value="#{pessoaService.pessoa.nome}" required="true" onkeyup="retirarAcento(this);
+                                notEspecialSomLetras(this);
+                                Maiuscula(this);"  />
+                    </h:panelGrid>
+                    <h:panelGrid columns="4" cellpadding="4" >
+                        <h:outputLabel value="RG:" />
+                        <h:outputLabel value="Nascimento" />
+                        <h:outputLabel value="Naturalidade" />
+                        <h:outputLabel value="Nascionalidade" />
+                        <p:inputText style="width: 100px;" value="#{pessoaService.pessoa.rg}"   />
+                        <p:inputMask mask="99/99/9999" styleClass="input-small"  />
+                        <p:inputText styleClass="input-small" value="#{pessoaService.pessoa.rg}"   />
+                        <p:inputText styleClass="input-small"  />
+                    </h:panelGrid>
+
+                </p:tab>
+                <p:tab title="Contato">
+                    <h:panelGrid columns="2" cellpadding="2">         
+                        <h:outputLabel value="E-mail Pricipal:" />
+                        <h:outputLabel value="E-mail Secundário:" />
+                        <p:inputText styleClass="input-xlarge" value="#{pessoaService.pessoa.email}"  />
+                        <p:inputText styleClass="input-xlarge"   />
+                        <h:outputLabel value="Telefone:" />
+                        <h:outputLabel value="Celular:" />
+                        <p:inputMask mask="(99)9999-9999" styleClass="input-medium" value="#{pessoaService.pessoa.telefonePrincipal}" />
+                        <p:inputMask mask="(99)9999-9999" styleClass="input-medium" value="#{pessoaService.pessoa.telefoneSecundario}" />
+                    </h:panelGrid>
+                </p:tab>
+
+                <p:tab title="Complementos">
+                    <h:panelGrid columns="3" cellpadding="4">
+                        <h:outputLabel value="Formação" />
+                        <h:outputLabel value="Profissão" />
+                        <h:outputLabel value="Renda" />
+                        <p:selectOneMenu >
+                            <f:selectItem itemLabel="Superior Completo" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Ensino Médio completo" itemValue="1" />
+                            <f:selectItem itemLabel="Ensino Funtamental completo " itemValue="2" />
+                            <f:selectItem itemLabel="Analfabeto Funcional" itemValue="3" />
+                        </p:selectOneMenu>
+                        <p:inputText styleClass="input-medium"  />
+                        <p:inputText styleClass="input-medium" value="#{pessoaService.pessoa.rg}"   />
+
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab title="Endereço">
+                    <p:commandButton value="Novo" onsuccess="endDialog.show()" icon=" ui-icon-plus" /><br/><br/>
+                    <p:dataTable >
+                        <p:column headerText="Logradouro"/>
+                        <p:column headerText="Bairro"/>
+                        <p:column headerText="Cidade"/>
+                        <p:column headerText="Estado"/>
+
+                    </p:dataTable>
+
+                    <p:dialog widgetVar="endDialog" >
+                        <h:panelGrid columns="2" cellpadding="3" >
+                            <h:outputLabel value="CEP:"  />
+                            <h:outputLabel value="Logradouro:" />
+                            <p:inputMask id="idCep" title="Digite um CEP válid o endereço" required="true" value="#{pessoaService.buscaCep}" mask="99999999" size="10" styleClass="input-small"  >
+                                <p:tooltip for="idCep"  showEvent="focus" hideEvent="blur" />  
+                                <p:ajax listener="#{pessoaService.pesquisarCEP}" />
+                            </p:inputMask>
+                            <p:inputText style="width: 300px;" value="#{pessoaService.rua.nome}"  />
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" cellpadding="2" >
+                            <h:outputLabel value="Bairro:"    />
+                            <h:outputLabel value="Estado:" />
+                            <p:inputText  value="#{pessoaService.rua.bairro.nome}" readonly="true" />
+                            <p:inputText  value="#{pessoaService.rua.bairro.cidade.nome}" styleClass="input-mini" readonly="true"  />
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" cellpadding="2" >
+                            <h:outputLabel value="Complemento:"  />
+                            <h:outputLabel value="Número:"  />
+                            <p:inputText style="width: 300px;" value="#{pessoaService.endereco.complemento}" />
+                            <p:inputText styleClass="input-small" value="#{pessoaService.endereco.numero}"  />
+                        </h:panelGrid>
+                        <h:outputLabel value="Tipo:" />
+                        <p:selectOneMenu >
+                            <f:selectItem itemLabel="Selecione" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Residêncial" itemValue="1" />
+                            <f:selectItem itemLabel="Comercial" itemValue="2" />
+                            <f:selectItem itemLabel="Outros" itemValue="3" />
+                        </p:selectOneMenu><br/><br/>
+
+
+                        <p:commandButton value="Adcionar" />
+                    </p:dialog>
+                </p:tab>
+
+            </p:tabView><br/>
+            <p:commandButton value="Confirmar" icon="ui-icon-circle-check" action="#{pessoaService.salvarPessoa()}" styleClass="btn btn-success btn-small" />
+            <p:commandButton value="Cancelar" icon=" ui-icon-closethick" styleClass="btn btn-danger btn-small "  />
+        </h:form> 
+    </ui:define>
+</ui:composition>

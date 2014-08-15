@@ -1,7 +1,7 @@
 package br.com.sistema.controller;
 
 import br.com.sistema.dao.GenericDAO;
-import br.com.sistema.dao.PessoaDAOImpl;
+
 import br.com.sistema.model.Bairro;
 import br.com.sistema.model.Cidade;
 import br.com.sistema.model.Cliente;
