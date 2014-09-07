@@ -28,25 +28,29 @@ public class Endereco implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Long id;
-    @OneToOne(fetch = FetchType.LAZY)
+  
+     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ESTADO_ID")
     private Estado estado;
-    @OneToOne(fetch = FetchType.LAZY)
+    
+     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CIDADE_ID")
     private Cidade cidade;
+    
     @OneToOne
     @JoinColumn(name = "BAIRRO_ID")
     private Bairro bairro;
+    
     @OneToOne
     @JoinColumn(name = "RUA_ID")
     private Rua rua;
+    
     @Column(name = "COMPLEMENTO")
     private String complemento;
+    
     @Column(name = "NUMERO")
     private String numero;
-    @OneToOne
-    @Column(name = "PESSOA_ID")
-    private Pessoa pessoa;
+ 
 
     public Long getId() {
         return id;

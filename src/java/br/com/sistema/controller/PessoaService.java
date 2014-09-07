@@ -28,12 +28,15 @@ import org.hibernate.criterion.Restrictions;
 public class PessoaService extends GenericDAO<Object, Serializable> {
 
     private Pessoa pessoa = new Pessoa();
+    private List<Pessoa> pessoas = new ArrayList<>();
     private Endereco endereco = new Endereco();
     private Rua rua = new Rua();
-    private Cliente cliente = new Cliente();
-    private List<Pessoa> pessoas = new ArrayList<>();
     private String filtro;
     private String buscaCep;
+
+    public PessoaService() {
+
+    }
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -59,20 +62,12 @@ public class PessoaService extends GenericDAO<Object, Serializable> {
         this.rua = rua;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
     public String getBuscaCep() {
         return buscaCep;
     }
 
     public void setBuscaCep(String buscaCep) {
         this.buscaCep = buscaCep;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public List<Pessoa> getPessoas() {
@@ -92,20 +87,24 @@ public class PessoaService extends GenericDAO<Object, Serializable> {
     }
 
     public void salvarEndereco() {
-      
+
         salvar(endereco);
+    }
+
+    public String goToForm() {
+        pessoa = new Pessoa();
+        return "faces/pages/cliente/form.xhtml";
     }
 
     public void salvarPessoa() {
         salvarEndereco();
-        pessoa.setEndereco(endereco);
+  //      pessoa.setEndereco(endereco);
         salvar(pessoa);
-        
+
         this.pessoa = new Pessoa();
         this.endereco = new Endereco();
         buscaCep = null;
         rua = null;
-        this.buscarPessoas();
 
     }
 
@@ -129,15 +128,15 @@ public class PessoaService extends GenericDAO<Object, Serializable> {
         this.endereco.setBairro(rua.getBairro());
         this.endereco.setCidade(rua.getBairro().getCidade());
         this.endereco.setEstado(rua.getBairro().getCidade().getEstado());
-       
-        System.out.println(ruaTemp.getNome() + " " + ruaTemp.getBairro().getNome() + " " 
-                + ruaTemp.getBairro().getCidade().getNome() + " " 
+
+        System.out.println(ruaTemp.getNome() + " " + ruaTemp.getBairro().getNome() + " "
+                + ruaTemp.getBairro().getCidade().getNome() + " "
                 + ruaTemp.getBairro().getCidade().getEstado().getSigla());
 
     }
 
     public List<Pessoa> filtrarPessoas() {
-        if (filtro == null) {
+        if (filtro.isEmpty()) {
             buscarPessoas();
             return null;
         }
@@ -150,11 +149,11 @@ public class PessoaService extends GenericDAO<Object, Serializable> {
 
     }
 
-    public void ExcluirPessoa() {
+    public void ExcluirPessoa(Pessoa pessoa) {
         excluir(pessoa);
     }
 
-    public void AtualizarPessoa() {
-
+    public void AtualizarPessoa(Pessoa pessoa) {
+        alterar(pessoa);
     }
 }

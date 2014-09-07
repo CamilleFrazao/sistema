@@ -2,6 +2,7 @@ package br.com.sistema.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,37 +29,54 @@ public class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "NOME", nullable = false, length = 80)
+    
+    @Column(name = "NOME", nullable = false )
     private String nome;
-    @Column(name = "CPF", nullable = false, length = 11)
+    
+    @Column(name = "CPF", nullable = false)
     private String cpf;
+    
     @Column(name = "RG")
     private String rg;
+  
     @Enumerated(EnumType.STRING)
     @Column(name = "GENERO")
     private Genero genero;
-    @Column(name = "TELEFONE_PRIMARIO", length = 12)
+   
+    @Column(name = "TELEFONE_PRIMARIO")
     private String telefonePrincipal;
-    @Column(name = "TELEFONE_SECUNDARIO", length = 12)
+    
+    @Column(name = "TELEFONE_SECUNDARIO")
     private String telefoneSecundario;
-    @Column(name = "TELEFONE_RECADO", length = 12)
+    
+    @Column(name = "TELEFONE_RECADO")
     private String telefoneRecado;
-    @Column(name = "EMAIL", length = 40)
+    
+    @Column(name = "EMAIL")
     private String email;
+    
+     @Column(name = "EMAIL_SECUNDARIO", length = 40)
+    private String emailSecundario;
+     
     @Column(name = "PROFISSAO")
     private String profissao;
+    
     @Column(name = "RENDA")
     private String renda;
+    
     @Column(name = "ESTADO_CIVIL", length = 20)
     private String estadoCivil;
+    
     @Column(name = "DATA_NASCIMENTO", length = 20)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataNascimento;
+    
     @Column(name = "DATA_CADASTRO")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataCadastro;
-    @OneToOne
-    @JoinColumn(name = "ENDERECO_ID")
+   
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ENDERECO_ID" )
     private Endereco endereco;
 
     public Long getId() {
@@ -125,6 +143,15 @@ public class Pessoa implements Serializable {
         this.telefoneRecado = telefoneRecado;
     }
 
+    public String getEmailSecundario() {
+        return emailSecundario;
+    }
+
+    public void setEmailSecundario(String emailSecundario) {
+        this.emailSecundario = emailSecundario;
+    }
+
+    
 
     public String getEmail() {
         return email;
@@ -192,7 +219,7 @@ public class Pessoa implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+       
         if (!(object instanceof Pessoa)) {
             return false;
         }
